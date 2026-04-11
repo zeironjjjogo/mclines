@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/mclines_test.dir/test.cpp.o CMakeFiles/mclines_test.dir/home/berhi/coding/mclines/src/diag.cpp.o -o mclines_test  /usr/local/lib/libgtest_main.a /usr/local/lib/libgtest.a 
