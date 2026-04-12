@@ -1,0 +1,4 @@
+/home/berhi/coding/mclines/test/build/CMakeFiles/mclines_test.dir
+/home/berhi/coding/mclines/test/build/CMakeFiles/test.dir
+/home/berhi/coding/mclines/test/build/CMakeFiles/edit_cache.dir
+/home/berhi/coding/mclines/test/build/CMakeFiles/rebuild_cache.dir

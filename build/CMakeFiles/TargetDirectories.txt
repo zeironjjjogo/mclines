@@ -1,0 +1,3 @@
+/home/berhi/coding/mclines/build/CMakeFiles/MCLs.dir
+/home/berhi/coding/mclines/build/CMakeFiles/edit_cache.dir
+/home/berhi/coding/mclines/build/CMakeFiles/rebuild_cache.dir

@@ -58,6 +58,7 @@ public:
     std::vector<diag_line> calc_line();
     size_property calc_size();
     static diag_line move_origin(const diag_line& line);
+    constexpr static int get_size() { return N_SPLIT * PIXEL_SIZE; }
 };
 
 
