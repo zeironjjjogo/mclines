@@ -1,6 +1,4 @@
-test/.
-build/.
-.vscode/.
-dst/.
-*.png
-*.txt
+test/
+build/
+.vscode/
+dst/
