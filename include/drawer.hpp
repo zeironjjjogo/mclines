@@ -10,8 +10,8 @@ class line_drawer
 public:
     line_drawer();
     ~line_drawer();
-    void draw(const cv::Point2f& p0, const cv::Point2f& p1, const cv::Point2i& size);
-    void draw_poly(const cv::Size& size, const cv::Point * pts, std::size_t npts, const cv::Scalar& color);
+    
+    void draw_poly(const cv::Size& size, const cv::Point * pts, const cv::Scalar& color, bool flip);
     void save(const cv::String& filepath);
     void transparent();
 };

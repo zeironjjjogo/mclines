@@ -1,59 +1,57 @@
 #ifndef MCLINES_DIAG_HPP_
 #define MCLINES_DIAG_HPP_
 
+#include <opencv2/core/types.hpp>
+
 #include <ostream>
 #include <vector>
+#include <tuple>
 
-template <typename T>
-struct point_t
+namespace mcls
 {
-    T x, y;
-    friend bool operator==(const point_t<T>& lh, const point_t<T>& rh)
-    { return lh.x == rh.x && lh.y == rh.y; }
-    friend std::ostream& operator <<(std::ostream& os, const point_t<T>& point)
-    { return os << "(" << point.x << ", " << point.y << ")"; }
-};
+    template <typename T>
+    struct line_
+    {
+        using point_type = cv::Point_<T>;
 
-using f_point = point_t<float>;
-using i_point = point_t<int>;
+        point_type p0, p1;
 
-template <typename T>
-struct diag_line_t
-{
-    point_t<T> p0, p1;
-    friend bool operator==(const diag_line_t<T>& lh, const diag_line_t<T>& rh)
-    { return lh.p0 == rh.p0 && lh.p1 == rh.p1; }
-    friend std::ostream& operator <<(std::ostream& os, const diag_line_t<T>& line)
-    { return os << "{" << line.p0 << ", " << line.p1 << "}"; }
-};
+        line_(point_type p_0, point_type p_1) : p0(p_0), p1(p_1) {}
+        line_(T p_0_x, T p_0_y, T p_1_x, T p_1_y) : p0(p_0_x, p_0_y), p1(p_1_x, p_1_y) {}
 
-using diag_line = diag_line_t<float>;
+        friend bool operator ==(const line_<T>& lh, const line_<T>& rh)
+        { return lh.p0 == rh.p0 && lh.p1 == rh.p1; }
 
-struct size_property
-{
-    float width, height, padx, pady, abspadx, abspady;
-};
+        friend std::ostream& operator <<(std::ostream& os, const line_<T>& line)
+        { return os << "[" << line.p0 << ", " << line.p1 << "]"; }
+    };
 
-class diag_calcer
+    using line2f = line_<float>;
+    using line2i = line_<int>;
+}
+
+class diag_calc
 {
     static constexpr int N_SPLIT = 16;
     static constexpr int N_LINE = 2;
     static constexpr int PIXEL_SIZE = 8;
 
-    i_point m_p0, m_p1;
+    cv::Point2i m_p0, m_p1;
     int m_n_w, m_n_h;
     float m_slope;
 
 public: 
-    diag_calcer(int p0x, int p0y, int p1x, int p1y);
-    diag_calcer(int p1x, int p1y);
-    diag_line calc_block(float &p0x, float &p0y);
-    std::vector<diag_line> calc_line();
-    f_point calc_padding();
-    size_property calc_size();
-    static diag_line move_origin(const diag_line& line);
+    diag_calc(int p0x, int p0y, int p1x, int p1y);
+    diag_calc(int p1x, int p1y);
+
+    mcls::line2f calc_block(float &p0x, float &p0y);
+    std::vector<mcls::line2f> calc_line();
+    cv::Point2f calc_padding();
+    cv::Size2f calc_size();
+    std::vector<cv::Point*> generate_points();
+    
+    static mcls::line2f move_origin(const mcls::line2f& line);
     static constexpr int get_size() { return N_SPLIT * PIXEL_SIZE; }
 };
-
 
 #endif

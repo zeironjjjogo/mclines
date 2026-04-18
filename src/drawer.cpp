@@ -10,18 +10,17 @@ line_drawer::~line_drawer()
     m_mat.release();
 }
 
-void line_drawer::draw(const cv::Point2f& p0, const cv::Point2f& p1, const cv::Point2i& size)
-{
-    m_mat = cv::Mat(size.x, size.y, CV_8UC4);
-    cv::line(m_mat, p0, p1, cv::Scalar(0xff, 0xff, 0xff), 16, cv::LINE_4);
-}
-
-void line_drawer::draw_poly(const cv::Size& size, const cv::Point * pts, std::size_t npts, const cv::Scalar& color)
+void line_drawer::draw_poly(const cv::Size& size, const cv::Point * pts, const cv::Scalar& color, bool flip)
 {
     m_mat = cv::Mat(size.height, size.width, CV_8UC4);
     m_mat = 0;
 
-    cv::fillConvexPoly(m_mat, pts, npts, color);
+    cv::fillConvexPoly(m_mat, pts, 4, color);
+
+    if (flip)
+    {
+        cv::flip(m_mat, m_mat, 0);
+    }
 
     transparent();
     
