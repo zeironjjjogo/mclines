@@ -86,7 +86,7 @@ mcls::line2f diag_calc::move_origin(const mcls::line2f& line)
 
     return {
         { (line.p0.x - floored_x) * SCALE, (line.p0.y - floored_y) * SCALE },
-        { (line.p1.x - floored_x) * SCALE, (line.p1.y - floored_y) * SCALE }
+        { (line.p1.x - floored_x) * SCALE - 1, (line.p1.y - floored_y) * SCALE - 1 }
     };
 }
 

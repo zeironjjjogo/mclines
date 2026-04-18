@@ -26,7 +26,7 @@ public:
 
         for (int i = 0; i < points.size(); i++)
         {
-            cv::String filename = generate_filename(fpath, i, m_dc.get_size(), mat_size, y / static_cast<float>(x));
+            cv::String filename = generate_filename(fpath, i, m_dc.get_size(), mat_size, static_cast<float>(x)/ y);
 
             m_ld.draw_poly(mat_size, points[i], line_color, does_flip);
             m_ld.save(filename);
@@ -75,7 +75,7 @@ public:
         fs::path dir = fs::weakly_canonical(fs::path(DST_DIR) / name);
         fs::create_directories(dir);
 
-        return dir /= dststr;
+        return (dir /= dststr).string();
     }
 };
 
@@ -89,12 +89,6 @@ int main(int argc, char *argv[])
 
     int line_color[3] = { 0xff, 0xff, 0xff };
     bool does_flip = false;
-
-    if (argc == 5 && std::strcmp(argv[4], "orange") == 0)
-    {
-        line_color[1] = 0x66;
-        line_color[2] = 0x00;
-    }
 
     if (argc == 5)
     {

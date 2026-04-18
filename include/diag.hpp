@@ -1,7 +1,7 @@
 #ifndef MCLINES_DIAG_HPP_
 #define MCLINES_DIAG_HPP_
 
-#include <opencv2/core/types.hpp>
+#include <opencv2/core/core.hpp>
 
 #include <ostream>
 #include <vector>
@@ -49,7 +49,7 @@ public:
     cv::Point2f calc_padding();
     cv::Size2f calc_size();
     std::vector<cv::Point*> generate_points();
-    
+
     static mcls::line2f move_origin(const mcls::line2f& line);
     static constexpr int get_size() { return N_SPLIT * PIXEL_SIZE; }
 };
